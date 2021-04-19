@@ -31,6 +31,7 @@ public class AccountController {
     @RequestMapping(value = "/newAccount", method = RequestMethod.GET) //value＝actionで指定したパラメータ
     public String createAccount(Model model) {
         return "createAccount";
+
     }
 
     /**
@@ -56,14 +57,36 @@ public class AccountController {
         UserInfo userInfo = new UserInfo();
         userInfo.setEmail(email);
 
-
         // TODO バリデーションチェック、パスワード一致チェック実装
+        // バリデーションチェック
+        boolean isEmailValid = email
+                .matches("\"^([a-zA-Z0-9])+([a-zA-Z0-9\\\\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\\\\._-]+)+$\"");
+        boolean isValidPW = password.matches("^[A-Za-z0-9]+$");
+        boolean isValidPWOForCheck = passwordForCheck.matches("^[A-Za-z0-9]+$");
+
+        //メール、パスワード、確認用パスワードどれか1つでも半角英数ではなかった場合
+        if (!isEmailValid || !isValidPW || !isValidPWOForCheck) {
+            model.addAttribute("error", "一文字以上半角英数を使用してください");
+            return "createAccount";
+
+        }
+
+        if (!password.equals(passwordForCheck)) {
+            model.addAttribute("error", "パスワードが一致しません");
+            return "createAccount";
+
+        }
+
+        if (!isEmailValid) {
+            return "createAccount";
+
+        }
 
         userInfo.setPassword(password);
         usersService.registUser(userInfo);
 
         model.addAttribute("bookList", booksService.getBookList());
         return "home";
-    }
 
+    }
 }
