@@ -33,7 +33,7 @@ public class BooksService {
 
         // TODO 取得したい情報を取得するようにSQLを修正
         List<BookInfo> getedBookList = jdbcTemplate.query(
-                "select * from books order by title asc",
+                "select * from books",
                 new BookInfoRowMapper());
 
         return getedBookList;
