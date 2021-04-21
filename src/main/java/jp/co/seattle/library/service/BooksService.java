@@ -33,7 +33,7 @@ public class BooksService {
 
         // TODO 取得したい情報を取得するようにSQLを修正
         List<BookInfo> getedBookList = jdbcTemplate.query(
-                "select * from books",
+                "SELECT id,title,author,publisher,publish_date,thumbnail_url from books order by title asc ",
                 new BookInfoRowMapper());
 
         return getedBookList;
@@ -56,8 +56,6 @@ public class BooksService {
         return bookDetailsInfo;
     }
 
-
-
     /**
      * 書籍を登録する
      *
@@ -72,6 +70,11 @@ public class BooksService {
                 + "sysdate(),"
                 + "sysdate())";
 
+        jdbcTemplate.update(sql);
+    }
+
+    public void deletingSystem(int bookId) {
+        String sql = "DELETE FROM books where id=" + bookId + ";";
         jdbcTemplate.update(sql);
     }
 }
