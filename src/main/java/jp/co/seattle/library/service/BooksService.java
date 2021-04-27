@@ -67,7 +67,7 @@ public class BooksService {
                 + bookInfo.getTitle() + "','"
                 + bookInfo.getAuthor() + "','"
                 + bookInfo.getPublisher() + "','"
-                + bookInfo.getPublish_date() + "','"
+                + bookInfo.getPublishDate() + "','"
                 + bookInfo.getThumbnailName() + "','"
                 + bookInfo.getThumbnailUrl() + "',"
                 + "sysdate(),"

@@ -58,7 +58,7 @@ public class AddBooksController {
             @RequestParam("thumbnail") MultipartFile file,
             @RequestParam("isbn") String isbn,
             @RequestParam("descripton") String descripton,
-            @RequestParam("publish_date") String publish_date,
+            @RequestParam("publish_date") String publishDate,
 
             Model model) {
         logger.info("Welcome insertBooks.java! The client locale is {}.", locale);
@@ -68,26 +68,30 @@ public class AddBooksController {
         bookInfo.setTitle(title);
         bookInfo.setAuthor(author);
         bookInfo.setPublisher(publisher);
-        bookInfo.setPublish_date(publish_date);
+        bookInfo.setPublishDate(publishDate);
         bookInfo.setIsbn(isbn);
         bookInfo.setDescripton(descripton);
 
         boolean isIsbn = isbn.matches("(^\\d{10,13}$)?");
+        boolean a = false;
 
         if (!isIsbn) {
             model.addAttribute("error1", "半角数字10文字以上13文字以内");
-            return "addBook";
+            a = true;
         }
 
         try {
             DateFormat df = new SimpleDateFormat("yyyyMMdd");
             df.setLenient(false);
-            df.parse(publish_date);
+            df.parse(publishDate);
         } catch (ParseException p) {
             model.addAttribute("error2", "年月日を入力してください");
-            return "addBook";
+            a = true;
         }
 
+        if (a) {
+            return "addBook";
+        }
         // クライアントのファイルシステムにある元のファイル名を設定する
         String thumbnail = file.getOriginalFilename();
 

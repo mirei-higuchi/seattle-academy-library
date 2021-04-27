@@ -28,7 +28,7 @@ public class BookDetailsInfo {
 
     private String descripton;
 
-    private String publish_date;
+    private String publishDate;
 
     public BookDetailsInfo() {
 
@@ -43,7 +43,7 @@ public class BookDetailsInfo {
         this.thumbnailUrl = thumbnailUrl;
         this.thumbnailName = thumbnailName;
         this.isbn = isbn;
-        this.publish_date = publish_date;
+        this.publishDate = publish_date;
         this.descripton = descripton;
 
     }
