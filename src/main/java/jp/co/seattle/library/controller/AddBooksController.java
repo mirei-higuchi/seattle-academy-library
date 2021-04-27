@@ -73,11 +73,11 @@ public class AddBooksController {
         bookInfo.setDescripton(descripton);
 
         boolean isIsbn = isbn.matches("(^\\d{10,13}$)?");
-        boolean a = false;
+        boolean check = false;
 
         if (!isIsbn) {
             model.addAttribute("error1", "半角数字10文字以上13文字以内");
-            a = true;
+            check = true;
         }
 
         try {
@@ -86,10 +86,10 @@ public class AddBooksController {
             df.parse(publishDate);
         } catch (ParseException p) {
             model.addAttribute("error2", "年月日を入力してください");
-            a = true;
+            check = true;
         }
 
-        if (a) {
+        if (check) {
             return "addBook";
         }
         // クライアントのファイルシステムにある元のファイル名を設定する
