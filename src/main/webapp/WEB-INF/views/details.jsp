@@ -63,9 +63,20 @@
                  </div>
             </div>
             <div class="edtDelBookBtn_box">
+            <form method="post" action="deleteBook">
+                    <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_rentBook" >借りる</button>
+                </form>
+                <form method="post" action="btn_returnBook">
+                    <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_returnBook" >返す</button>
+                </form>
+             <form method="post" action="btn_editBook">
+                    <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_editBook" >編集</button>
+                </form>
+                
                 <form method="post" action="deleteBook">
                     <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_deleteBook" >削除</button>
                 </form>
+                
             </div>
     </main>
 
