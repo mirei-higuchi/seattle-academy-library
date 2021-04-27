@@ -43,7 +43,6 @@
                     </a>
                 </div>
             </div>
-            <<<<<<< HEAD
             <div class="edtDelBookBtn_box">
                 <form method="post" action="deleteBook">
                     <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_rentBook">借りる</button>
@@ -57,7 +56,6 @@
                 <form method="post" action="deleteBook">
                     <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_deleteBook">削除</button>
                 </form>
-                =======
                 <div class="content_right">
                     <div>
                         <span>書籍名</span>
@@ -83,12 +81,10 @@
                         <span>説明文</span>
                         <p>${bookDetailsInfo.descripton}</p>
                     </div>
-                    >>>>>>> develop
                 </div>
             </div>
             <div class="edtDelBookBtn_box">
                 <form method="post" action="deleteBook">
-                    <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_deleteBook">削除</button>
                 </form>
             </div>
     </main>
