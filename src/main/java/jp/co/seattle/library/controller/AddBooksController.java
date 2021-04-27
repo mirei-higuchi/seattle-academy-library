@@ -1,5 +1,8 @@
 package jp.co.seattle.library.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -53,6 +56,10 @@ public class AddBooksController {
             @RequestParam("author") String author,
             @RequestParam("publisher") String publisher,
             @RequestParam("thumbnail") MultipartFile file,
+            @RequestParam("isbn") String isbn,
+            @RequestParam("descripton") String descripton,
+            @RequestParam("publish_date") String publishDate,
+
             Model model) {
         logger.info("Welcome insertBooks.java! The client locale is {}.", locale);
 
@@ -61,7 +68,30 @@ public class AddBooksController {
         bookInfo.setTitle(title);
         bookInfo.setAuthor(author);
         bookInfo.setPublisher(publisher);
+        bookInfo.setPublishDate(publishDate);
+        bookInfo.setIsbn(isbn);
+        bookInfo.setDescripton(descripton);
 
+        boolean isIsbn = isbn.matches("(^\\d{10,13}$)?");
+        boolean check = false;
+
+        if (!isIsbn) {
+            model.addAttribute("error1", "半角数字10文字以上13文字以内");
+            check = true;
+        }
+
+        try {
+            DateFormat df = new SimpleDateFormat("yyyyMMdd");
+            df.setLenient(false);
+            df.parse(publishDate);
+        } catch (ParseException p) {
+            model.addAttribute("error2", "年月日を入力してください");
+            check = true;
+        }
+
+        if (check) {
+            return "addBook";
+        }
         // クライアントのファイルシステムにある元のファイル名を設定する
         String thumbnail = file.getOriginalFilename();
 
@@ -90,6 +120,9 @@ public class AddBooksController {
         model.addAttribute("resultMessage", "登録完了");
 
         // TODO 登録した書籍の詳細情報を表示するように実装
+        int newId = booksService.getNewId();
+        BookDetailsInfo newIdInfo = booksService.getBookInfo(newId);
+        model.addAttribute("bookDetailsInfo", newIdInfo);
         //  詳細画面に遷移する
         return "details";
     }
