@@ -87,4 +87,19 @@ public class BooksService {
         String sql = "DELETE FROM books where id=" + bookId + ";";
         jdbcTemplate.update(sql);
     }
+
+    public void updateBooks(BookDetailsInfo bookInfo) {
+        String sql = "update books set title='" + bookInfo.getTitle()
+                + "',author='" + bookInfo.getAuthor()
+                + "',publisher='" + bookInfo.getPublisher()
+                + "',publish_date='" + bookInfo.getPublishDate()
+                + "',thumbnail_url='" + bookInfo.getThumbnailUrl()
+                + "',thumbnail_name='" + bookInfo.getThumbnailName()
+                + "',upd_date=sysdate()"
+                + ",isbn='" + bookInfo.getIsbn()
+                + "',descripton='" + bookInfo.getDescripton()
+                + "'where id=" + bookInfo.getBookId() + ";";
+        jdbcTemplate.update(sql);
+    }
+
 }
