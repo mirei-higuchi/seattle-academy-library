@@ -43,50 +43,47 @@
                     </a>
                 </div>
             </div>
-            <div class="edtDelBookBtn_box">
-                <form method="post" action="deleteBook">
-                    <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_rentBook">借りる</button>
-                </form>
-                <form method="post" action="btn_returnBook">
-                    <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_returnBook">返す</button>
-                </form>
-                <form method="post" action="btn_editBook">
-                    <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_editBook">編集</button>
-                </form>
-                <form method="post" action="deleteBook">
-                    <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_deleteBook">削除</button>
-                </form>
-                <div class="content_right">
-                    <div>
-                        <span>書籍名</span>
-                        <p>${bookDetailsInfo.title}</p>
-                    </div>
-                    <div>
-                        <span>著者名</span>
-                        <p>${bookDetailsInfo.author}</p>
-                    </div>
-                    <div>
-                        <span>出版社</span>
-                        <p>${bookDetailsInfo.publisher}</p>
-                    </div>
-                    <div>
-                        <span>出版日</span>
-                        <p>${bookDetailsInfo.publish_date }</p>
-                    </div>
-                    <div>
-                        <span>ISBN</span>
-                        <p>${bookDetailsInfo.isbn}</p>
-                    </div>
-                    <div>
-                        <span>説明文</span>
-                        <p>${bookDetailsInfo.descripton}</p>
-                    </div>
+            <div class="content_right">
+                <div>
+                    <span>書籍名</span>
+                    <p>${bookDetailsInfo.title}</p>
+                </div>
+                <div>
+                    <span>著者名</span>
+                    <p>${bookDetailsInfo.author}</p>
+                </div>
+                <div>
+                    <span>出版社</span>
+                    <p>${bookDetailsInfo.publisher}</p>
+                </div>
+                <div>
+                    <span>出版日</span>
+                    <p>${bookDetailsInfo.publishDate }</p>
+                </div>
+                <div>
+                    <span>ISBN</span>
+                    <p>${bookDetailsInfo.isbn}</p>
+                </div>
+                <div>
+                    <span>説明文</span>
+                    <p>${bookDetailsInfo.descripton}</p>
                 </div>
             </div>
-            <div class="edtDelBookBtn_box">
-                <form method="post" action="deleteBook">
-                </form>
-            </div>
+        </div>
+        <div class="edtDelBookBtn_box">
+            <form method="post" action="deleteBook">
+                <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_rentBook">借りる</button>
+            </form>
+            <form method="post" action="btn_returnBook">
+                <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_returnBook">返す</button>
+            </form>
+            <form method="post" action="btn_editBook">
+                <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_editBook">編集</button>
+            </form>
+            <form method="post" action="deleteBook">
+                <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_deleteBook">削除</button>
+            </form>
+        </div>
     </main>
 </body>
 </html>
