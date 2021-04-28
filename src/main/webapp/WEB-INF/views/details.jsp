@@ -24,8 +24,8 @@
         </div>
         <div class="right">
             <ul>
-                <li><a href="<%= request.getContextPath()%>/home" class="menu">Home</a></li>
-                <li><a href="<%= request.getContextPath()%>/">ログアウト</a></li>
+                <li><a href="<%=request.getContextPath()%>/home" class="menu">Home</a></li>
+                <li><a href="<%=request.getContextPath()%>/">ログアウト</a></li>
             </ul>
         </div>
     </header>
@@ -57,8 +57,8 @@
                     <p>${bookDetailsInfo.publisher}</p>
                 </div>
                 <div>
-                   <span>出版日</span>
-                   <p>${bookDetailsInfo.publish_date }</p>
+                    <span>出版日</span>
+                    <p>${bookDetailsInfo.publishDate }</p>
                 </div>
                 <div>
                     <span>ISBN</span>
@@ -71,6 +71,15 @@
             </div>
         </div>
         <div class="edtDelBookBtn_box">
+            <form method="post" action="deleteBook">
+                <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_rentBook">借りる</button>
+            </form>
+            <form method="post" action="btn_returnBook">
+                <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_returnBook">返す</button>
+            </form>
+            <form method="post" action="btn_editBook">
+                <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_editBook">編集</button>
+            </form>
             <form method="post" action="deleteBook">
                 <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_deleteBook">削除</button>
             </form>
