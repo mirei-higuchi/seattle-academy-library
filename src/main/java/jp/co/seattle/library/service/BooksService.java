@@ -88,6 +88,9 @@ public class BooksService {
         jdbcTemplate.update(sql);
     }
 
+    /**
+     * @param bookInfo
+     */
     public void updateBooks(BookDetailsInfo bookInfo) {
         String sql = "update books set title='" + bookInfo.getTitle()
                 + "',author='" + bookInfo.getAuthor()

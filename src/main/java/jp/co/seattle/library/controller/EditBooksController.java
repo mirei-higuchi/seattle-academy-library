@@ -23,6 +23,10 @@ import jp.co.seattle.library.service.ThumbnailService;
 /**
  * Handles requests for the application home page.
  */
+/**
+ * @author user
+ *
+ */
 @Controller //APIの入り口
 public class EditBooksController {
     final static Logger logger = LoggerFactory.getLogger(EditBooksController.class);
@@ -42,6 +46,19 @@ public class EditBooksController {
         return "edit";
     }
 
+    /**
+     * @param locale
+     * @param title
+     * @param author
+     * @param publisher
+     * @param file
+     * @param isbn
+     * @param descripton
+     * @param publishDate
+     * @param bookId
+     * @param model
+     * @return
+     */
     @Transactional
     @RequestMapping(value = "/updateBook", method = RequestMethod.POST, produces = "text/plain;charset=utf-8")
     public String updateBooks(Locale locale,
@@ -108,16 +125,10 @@ public class EditBooksController {
                 return "editBook";
             }
         }
-        booksService.updateBooks(bookInfo);
-        model.addAttribute("resultMessage", "編集完了");
-
         booksService.getBookInfo(bookId);
-        {
-            BookDetailsInfo newIdInfo = booksService.getBookInfo(bookId);
-            model.addAttribute("bookDetailsInfo", newIdInfo);
-            return "details";
+        BookDetailsInfo newIdInfo = booksService.getBookInfo(bookId);
+        model.addAttribute("bookDetailsInfo", newIdInfo);
+        return "details";
 
-        }
     }
-
 }
