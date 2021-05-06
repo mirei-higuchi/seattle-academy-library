@@ -47,6 +47,7 @@ public class EditBooksController {
     }
 
     /**
+     * 登録書籍情報を取得する
      * @param locale
      * @param title
      * @param author
