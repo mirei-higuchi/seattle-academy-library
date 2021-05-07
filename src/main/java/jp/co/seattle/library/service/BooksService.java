@@ -89,6 +89,7 @@ public class BooksService {
     }
 
     /**
+     * 登録書籍情報を更新する
      * @param bookInfo
      */
     public void updateBooks(BookDetailsInfo bookInfo) {
