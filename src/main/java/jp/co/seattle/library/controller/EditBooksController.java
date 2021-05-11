@@ -85,11 +85,11 @@ public class EditBooksController {
         bookInfo.setDescripton(descripton);
         bookInfo.setBookId(bookId);
 
-        boolean isIsbn = isbn.matches("(^\\d{10,13}$)?");
+        boolean isIsbn = isbn.matches("(^\\d{10}|\\d{13}$)?");
         boolean check = false;
 
         if (!isIsbn) {
-            model.addAttribute("error1", "半角数字10文字以上13文字以内");
+            model.addAttribute("error1", "半角数字10文字または13文字で入力して下さい");
             check = true;
         }
 
