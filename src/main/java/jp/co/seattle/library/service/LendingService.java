@@ -13,21 +13,21 @@ public class LendingService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    public int lentCheck(int bookId) {
+        String sql = "SELECT COUNT( * ) FROM lending where id=" + bookId + ";";
+        int lentCheck = jdbcTemplate.queryForObject(sql, Integer.class);
+
+        return lentCheck;
+    }
+
     public void lentSystem(int bookId) {
-        String sql = "INSERT INTO lending (id) VALUES ('" + bookId + "')";
+        String sql = "INSERT INTO lending (id) VALUES (" + bookId + ");";
         jdbcTemplate.update(sql);
     }
 
     public void returnSystem(int bookId) {
         String sql = "DELETE FROM lending where id=" + bookId + ";";
         jdbcTemplate.update(sql);
-    }
-    
-    
-    public int lentnum (int bookId) {
-        String sql = "SELECT COUNT( '"+ bookId +"' ) FROM lending ";
-    }
-        
     }
 
 }
