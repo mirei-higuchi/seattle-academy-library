@@ -92,7 +92,7 @@ public class BulkRegistController {
                 bookInfo.setTitle(data[0]);
                 bookInfo.setAuthor(data[1]);
                 bookInfo.setPublisher(data[2]);
-                bookInfo.setIsbn(data[3]);
+                bookInfo.setPublishDate(data[3]);
 
                 if (check) {
                     errorMsg.add(count + "行目の書籍情報登録でバリデーションエラー");
