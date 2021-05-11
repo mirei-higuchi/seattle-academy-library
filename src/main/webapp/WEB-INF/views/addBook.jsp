@@ -97,7 +97,7 @@
                             <input type="text" name="bookId" value="${bookInfo.publishDate}">
                         </c:if>
                         <c:if test="${empty bookInfo }">
-                            <input type="text" name="publish_date" required>
+                            <input type="text" name="publishDate" required>
                         </c:if>
                     </div>
                     <div>
