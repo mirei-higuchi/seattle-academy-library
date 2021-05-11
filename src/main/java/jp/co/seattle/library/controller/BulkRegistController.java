@@ -4,9 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -64,8 +61,7 @@ public class BulkRegistController {
             @RequestParam("csvFile") MultipartFile uploadFile, Model model) {
         logger.info("Welcome insertBooks.java! The client locale is {}.", locale);
 
-        try (
-                InputStream stream = uploadFile.getInputStream();
+        try (InputStream stream = uploadFile.getInputStream();
                 Reader reader = new InputStreamReader(stream);
                 BufferedReader buf = new BufferedReader(reader);) {
 
@@ -83,6 +79,7 @@ public class BulkRegistController {
                 BookDetailsInfo bookInfo = new BookDetailsInfo();
 
                 bookInfo.setDescripton(data[5]);
+                bookInfo.setIsbn(data[4]);
 
                 boolean check = false;
 
@@ -95,27 +92,7 @@ public class BulkRegistController {
                 bookInfo.setTitle(data[0]);
                 bookInfo.setAuthor(data[1]);
                 bookInfo.setPublisher(data[2]);
-
-                try {
-                    DateFormat df = new SimpleDateFormat("yyyyMMdd");
-                    df.setLenient(false);
-                    df.parse(data[3]);
-
-                    bookInfo.setPublishDate(data[3]);
-
-                } catch (ParseException p) {
-                    model.addAttribute("error2", "年月日を入力してください");
-                    check = true;
-                }
-
-                boolean isIsbn = data[4].matches("(^\\d{10}|\\d{13}$)?");
-
-                if (!isIsbn) {
-                    model.addAttribute("error1", "半角数字10文字または13文字で入力して下さい");
-                    check = true;
-                }
-
-                bookInfo.setIsbn(data[4]);
+                bookInfo.setIsbn(data[3]);
 
                 if (check) {
                     errorMsg.add(count + "行目の書籍情報登録でバリデーションエラー");
