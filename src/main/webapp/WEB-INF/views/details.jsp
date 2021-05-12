@@ -42,6 +42,12 @@
                         </c:if> <input type="hidden" name="bookId" value="${bookDetailsInfo.bookId}">
                     </a>
                 </div>
+                <div>
+                    <c:if test="${!empty deleteError}">
+                        <div class="error_msg">${deleteError}</div>
+                    </c:if>
+                    <p>${lending}</p>
+                </div>
             </div>
             <div class="content_right">
                 <div>
@@ -71,7 +77,7 @@
             </div>
         </div>
         <div class="edtDelBookBtn_box">
-            <form method="post" action="deleteBook">
+            <form method="post" action="btn_rentBook">
                 <button type="submit" value="${bookDetailsInfo.bookId}" name="bookId" class="btn_rentBook">借りる</button>
             </form>
             <form method="post" action="btn_returnBook">
