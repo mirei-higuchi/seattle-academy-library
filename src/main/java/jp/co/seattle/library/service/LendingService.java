@@ -13,7 +13,11 @@ public class LendingService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    //テーブルに本が追加されているか確認する
+    /**
+     * lendingテーブルに本が追加されているか確認する
+     * @param bookId
+     * @return
+     */
     public int lentCheck(int bookId) {
         String sql = "SELECT COUNT( * ) FROM lending where id=" + bookId + ";";
         int lentCheck = jdbcTemplate.queryForObject(sql, Integer.class);

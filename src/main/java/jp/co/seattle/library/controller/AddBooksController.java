@@ -127,15 +127,7 @@ public class AddBooksController {
         BookDetailsInfo newIdInfo = booksService.getBookInfo(newId);
         model.addAttribute("bookDetailsInfo", newIdInfo);
 
-        if (lendingService.lentCheck(newId) == 1) {
-
-            model.addAttribute("lending", "貸出中");
-        }
-
-        if (lendingService.lentCheck(newId) == 0) {
-
-            model.addAttribute("lending", "貸出可");
-        }
+        model.addAttribute("lending", "貸出可");
 
         return "details";
     }
