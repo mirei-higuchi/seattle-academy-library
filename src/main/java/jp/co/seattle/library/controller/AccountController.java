@@ -64,11 +64,12 @@ public class AccountController {
         boolean isValidPWOForCheck = passwordForCheck.matches("^[A-Za-z0-9]+$");
 
         //メール、パスワード、確認用パスワードどれか1つでも半角英数ではなかった場合
-        if (!isEmailValid || !isValidPW || !isValidPWOForCheck) {
+        /*if (!isEmailValid || !isValidPW || !isValidPWOForCheck) {
             model.addAttribute("error", "一文字以上半角英数を使用してください");
             return "createAccount";
-
+        
         }
+        */
 
         if (!password.equals(passwordForCheck)) {
             model.addAttribute("error", "パスワードが一致しません");
