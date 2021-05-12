@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import jp.co.seattle.library.dto.BookDetailsInfo;
 import jp.co.seattle.library.service.BooksService;
 import jp.co.seattle.library.service.LendingService;
 
@@ -41,23 +40,13 @@ public class LendingController {
             @RequestParam("bookId") Integer bookId, Model model) {
         logger.info("Welcome delete! The client locale is {}.", locale);
 
-        if (lendingService.lentCheck(bookId) == 1) {
-
-            model.addAttribute("lending", "貸出中");
-
-            int newId = booksService.getNewId();
-            BookDetailsInfo newIdInfo = booksService.getBookInfo(newId);
-            model.addAttribute("bookDetailsInfo", newIdInfo);
-            return "details";
+        if (lendingService.lentCheck(bookId) == 0) {
+            lendingService.lentSystem(bookId);
         }
 
-        lendingService.lentSystem(bookId);
         model.addAttribute("lending", "貸出中");
 
-
-        int newId = booksService.getNewId();
-        BookDetailsInfo newIdInfo = booksService.getBookInfo(newId);
-        model.addAttribute("bookDetailsInfo", newIdInfo);
+        model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 
         return "details";
     }
@@ -76,12 +65,12 @@ public class LendingController {
             Model model) {
         logger.info("Welcome delete! The client locale is {}.", locale);
 
-        lendingService.returnSystem(bookId);
+        if (lendingService.lentCheck(bookId) == 1) {
+            lendingService.returnSystem(bookId);
+        }
         model.addAttribute("lending", "貸出可");
 
-        int newId = booksService.getNewId();
-        BookDetailsInfo newIdInfo = booksService.getBookInfo(newId);
-        model.addAttribute("bookDetailsInfo", newIdInfo);
+        model.addAttribute("bookDetailsInfo", booksService.getBookInfo(bookId));
 
         return "details";
     }

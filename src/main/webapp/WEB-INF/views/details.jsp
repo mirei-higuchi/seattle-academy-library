@@ -43,6 +43,9 @@
                     </a>
                 </div>
                 <div>
+                    <c:if test="${!empty deleteError}">
+                        <div class="error_msg">${deleteError}</div>
+                    </c:if>
                     <p>${lending}</p>
                 </div>
             </div>
