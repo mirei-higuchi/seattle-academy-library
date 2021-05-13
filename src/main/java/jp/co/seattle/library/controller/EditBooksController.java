@@ -126,7 +126,7 @@ public class EditBooksController {
                 return "editBook";
             }
         }
-        booksService.getBookInfo(bookId);
+        booksService.updateBooks(bookInfo);
         BookDetailsInfo newIdInfo = booksService.getBookInfo(bookId);
         model.addAttribute("bookDetailsInfo", newIdInfo);
         return "details";
