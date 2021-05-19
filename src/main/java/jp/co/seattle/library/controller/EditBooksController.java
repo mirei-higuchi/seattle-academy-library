@@ -86,6 +86,10 @@ public class EditBooksController {
         bookInfo.setBookId(bookId);
 
         boolean isIsbn = isbn.matches("(^\\d{10}|\\d{13}$)?");
+        boolean isTitle = title.matches("(^\\\\d{1,255}$)?");
+        boolean isAuthor = author.matches("(^\\\\d{1,255}$)?");
+        boolean isPublisher = publisher.matches("(^\\\\d{1,255}$)?");
+        boolean isPublishDate = publishDate.matches("(^\\\\d{1,255}$)?");
         boolean check = false;
 
         if (!isIsbn) {
