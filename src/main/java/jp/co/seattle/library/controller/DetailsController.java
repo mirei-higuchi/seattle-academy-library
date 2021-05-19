@@ -53,7 +53,7 @@ public class DetailsController {
         //返却機能
         if (lendingService.lentCheck(bookId) == 0) {
 
-            model.addAttribute("lending", "貸出中");
+            model.addAttribute("lending", "貸出可");
 
         }
         model.addAttribute("bookDetailsInfo", bookdService.getBookInfo(bookId));
