@@ -30,8 +30,6 @@ public class BooksService {
      * @return 書籍リスト
      */
     public List<BookInfo> getBookList() {
-
-        // TODO 取得したい情報を取得するようにSQLを修正
         List<BookInfo> getedBookList = jdbcTemplate.query(
                 "SELECT id,title,author,publisher,publish_date,thumbnail_url from books order by title asc ",
                 new BookInfoRowMapper());
@@ -83,6 +81,10 @@ public class BooksService {
         return newId;
     }
 
+    /**
+     * 削除機能
+     * @param bookId
+     */
     public void deletingSystem(int bookId) {
         String sql = "DELETE FROM books where id=" + bookId + ";";
         jdbcTemplate.update(sql);
@@ -104,6 +106,20 @@ public class BooksService {
                 + "',descripton='" + bookInfo.getDescripton()
                 + "'where id=" + bookInfo.getBookId() + ";";
         jdbcTemplate.update(sql);
+    }
+
+    /**
+     * 検索された文字を含むタイトルの取得
+     * @param searchBook
+     * @return
+     */
+    public List<BookInfo> getSearchBooklist(String searchBook) {
+        List<BookInfo> getedBookList = jdbcTemplate.query(
+                "SELECT id,title,author,publisher,publish_date,thumbnail_url from books where title like '%"
+                        + searchBook + "%' ORDER BY title asc",
+                new BookInfoRowMapper());
+
+        return getedBookList;
     }
 
 }
