@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,11 +24,23 @@ public class SearchBookController {
     @Autowired
     private BooksService booksService;
 
-    //実行
+    /**
+     * 書籍タイトル検索機能
+     * @param locale
+     * @param searchBook
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/searchBook", method = RequestMethod.POST)
     public String serchBook(Locale locale,
             @RequestParam("search") String searchBook,
             Model model) {
+
+        if (CollectionUtils.isEmpty(booksService.getSearchBooklist(searchBook))) {
+            model.addAttribute("errorMessage", "該当する書籍名がありません");
+            return "home";
+        }
+
         model.addAttribute("bookList", booksService.getSearchBooklist(searchBook));
 
         return "home";
