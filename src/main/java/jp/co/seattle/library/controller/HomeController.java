@@ -31,4 +31,10 @@ public class HomeController {
         return "home";
     }
 
+    @RequestMapping(value = "/lendingBook", method = RequestMethod.GET)
+    public String login(Model model) {
+
+        return "home";
+    }
+
 }
