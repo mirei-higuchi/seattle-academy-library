@@ -129,7 +129,7 @@ public class BooksService {
      */
     public List<BookInfo> getLendingBooklist() {
         List<BookInfo> getedLendingBookList = jdbcTemplate.query(
-                "SELECT * FROM books INNER JOIN lending ON books.id = lending.id",
+                "SELECT *FROM books LEFT OUTER JOIN lending ON (books.id = lending.id) WHERE lending.id IS NULL",
                 new BookInfoRowMapper());
         return getedLendingBookList;
     }

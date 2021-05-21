@@ -26,7 +26,7 @@
     </header>
     <main>
         <h1>Home</h1>
-        <a href="<%=request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a> <a href="<%=request.getContextPath()%>/bulkRegist" class="btn_bulk_book">一括登録</a> <a href="<%= request.getContextPath()%>/lendingBook" class="btn_lending_book">貸出中書籍一覧 </a>
+        <a href="<%=request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a> <a href="<%=request.getContextPath()%>/bulkRegist" class="btn_bulk_book">一括登録</a> <a href="<%=request.getContextPath()%>/lendingBook" class="btn_lending_book">貸出可書籍一覧 </a>
         <form action="searchBook" method="post">
             <span style="”line-height: 200%;">検索したいタイトルを入力してください。</span> <input type="search" name="search" placeholder="キーワードを入力"> <input class="searchBook" type="submit" name="submit" value="検索">
             <center>
