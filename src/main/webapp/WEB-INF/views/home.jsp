@@ -26,17 +26,19 @@
     </header>
     <main>
         <h1>Home</h1>
-        <a href="<%=request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a> <a href="<%=request.getContextPath()%>/bulkRegist" class="btn_bulk_book">一括登録</a>
-        <div style="display: inline-flex">
-            <form action="searchBook" method="post">
-                <p>検索したいタイトルを入力してください。</p>
-                <input type="search" name="search" placeholder="キーワードを入力"> <input type="submit" name="submit" value="検索">
-        </div>
-        <center>
-            <c:if test="${!empty errorMessage}">
-                <div class="error">${errorMessage}</div>
-            </c:if>
-        </center>
+        <a href="<%=request.getContextPath()%>/addBook" class="btn_add_book">書籍の追加</a> <a href="<%=request.getContextPath()%>/bulkRegist" class="btn_bulk_book">一括登録</a> <a href="<%=request.getContextPath()%>/lendingBook" class="btn_lending_book">貸出可書籍一覧 </a>
+        <form action="searchBook" method="post">
+            <span style="”line-height: 200%;">検索したいタイトルを入力してください。</span> <input type="search" name="search" placeholder="キーワードを入力"> <input class="searchBook" type="submit" name="submit" value="検索">
+            <center>
+                <c:if test="${!empty noLendingMessage}">
+                    <div class="error">${noLendingMessage}</div>
+                </c:if>
+            </center>
+            <center>
+                <c:if test="${!empty errorMessage}">
+                    <div class="error">${errorMessage}</div>
+                </c:if>
+            </center>
         </form>
         <div class="content_body">
             <c:if test="${!empty resultMessage}">
