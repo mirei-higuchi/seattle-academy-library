@@ -122,4 +122,16 @@ public class BooksService {
         return getedBookList;
     }
 
+    /**
+     * 貸出可能書籍取得
+     * @param searchBook
+     * @return
+     */
+    public List<BookInfo> getLendingBooklist() {
+        List<BookInfo> getedLendingBookList = jdbcTemplate.query(
+                "SELECT * FROM books INNER JOIN lending ON books.id = lending.id",
+                new BookInfoRowMapper());
+        return getedLendingBookList;
+    }
+
 }
