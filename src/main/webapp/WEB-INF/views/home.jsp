@@ -45,13 +45,13 @@
                 <div class="error_msg">${resultMessage}</div>
             </c:if>
             <div>
-                <div class="booklist">
-                    <c:forEach var="bookInfo" items="${bookList}">
-                        <div class="books">
+                <c:forEach var="bookInfo" items="${bookList}">
+                    <div class="books">
+                        <div class="book_box">
                             <form method="post" class="book_thumnail" action="<%=request.getContextPath()%>/details">
-                                <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <c:if test="${empty bookInfo.thumbnail}">
+                                <a href="javascript:void(0)" onclick="this.parentNode.submit();"> <c:if test="${bookInfo.thumbnail =='null'}">
                                         <img class="book_noimg" src="resources/img/noImg.png">
-                                    </c:if> <c:if test="${!empty bookInfo.thumbnail}">
+                                    </c:if> <c:if test="${bookInfo.thumbnail !='null'}">
                                         <img class="book_noimg" src="${bookInfo.thumbnail}">
                                     </c:if>
                                 </a> <input type="hidden" name="bookId" value="${bookInfo.bookId}">
@@ -63,9 +63,17 @@
                                 <li class="book_publisher">${bookInfo.publisher}</li>
                             </ul>
                         </div>
-                    </c:forEach>
-                </div>
+                    </div>
+                </c:forEach>
             </div>
+        </div>
+        </div>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.4/css/all.css">
+        <div id="page_top">
+            <a href="#"></a>
+        </div>
+        </div>
+        </div>
         </div>
     </main>
 </body>
