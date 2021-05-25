@@ -10,6 +10,7 @@
 <link href="<c:url value="/resources/css/default.css" />" rel="stylesheet" type="text/css">
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 <link href="<c:url value="/resources/css/home.css" />" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.4/css/all.css">
 </head>
 <body class="wrapper">
     <header>
@@ -68,7 +69,6 @@
             </div>
         </div>
         </div>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.4/css/all.css">
         <div id="page_top">
             <a href="#"></a>
         </div>
