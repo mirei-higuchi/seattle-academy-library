@@ -55,9 +55,7 @@
                     <p>※サムネイル画像は一括登録できません。編集画面で１冊単位で登録してください。</p>
                 </div>
                 <c:if test="${!empty errorMessage}">
-                    <c:forEach items="${errorMessage}" var="error">
-                        <div class="error">${error}</div>
-                    </c:forEach>
+                    <div class="error">${errorMessage}</div>
                 </c:if>
                 <div>
                     <div>

@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jp.co.seattle.library.dto.BookDetailsInfo;
 import jp.co.seattle.library.service.BooksService;
+import jp.co.seattle.library.service.LendingService;
 import jp.co.seattle.library.service.ThumbnailService;
 
 /**
@@ -37,12 +38,13 @@ public class EditBooksController {
     @Autowired
     private ThumbnailService thumbnailService;
 
+    @Autowired
+    private LendingService lendingService;
+
     @RequestMapping(value = "/btn_editBook", method = RequestMethod.POST)
     public String login(Locale locale, @RequestParam("bookId") Integer bookId, Model model) {
-
         BookDetailsInfo newIdInfo = booksService.getBookInfo(bookId);
         model.addAttribute("bookDetailsInfo", newIdInfo);
-
         return "edit";
     }
 
@@ -132,6 +134,17 @@ public class EditBooksController {
         }
         booksService.updateBooks(bookInfo);
         BookDetailsInfo newIdInfo = booksService.getBookInfo(bookId);
+        if (lendingService.lentCheck(bookId) == 1) {
+
+            model.addAttribute("lending", "貸出中");
+        }
+
+        //返却機能
+        if (lendingService.lentCheck(bookId) == 0) {
+
+            model.addAttribute("lending", "貸出可");
+
+        }
         model.addAttribute("bookDetailsInfo", newIdInfo);
         return "details";
 
