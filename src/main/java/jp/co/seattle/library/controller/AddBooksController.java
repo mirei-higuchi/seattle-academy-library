@@ -64,7 +64,6 @@ public class AddBooksController {
             @RequestParam("descripton") String descripton,
             @RequestParam("publishDate") String publishDate,
 
-
             Model model) {
         logger.info("Welcome insertBooks.java! The client locale is {}.", locale);
 
@@ -77,20 +76,47 @@ public class AddBooksController {
         bookInfo.setIsbn(isbn);
         bookInfo.setDescripton(descripton);
 
-
         boolean isIsbn = isbn.matches("(^\\d{10}|\\d{13}$)?");
         boolean check = false;
-
-        if (!isIsbn) {
-            model.addAttribute("error1", "半角数字10文字または13文字で入力して下さい");
-            check = true;
-        }
 
         try {
             DateFormat df = new SimpleDateFormat("yyyyMMdd");
             df.setLenient(false);
             df.parse(publishDate);
         } catch (ParseException p) {
+            model.addAttribute("error2", "年月日を入力してください");
+            check = true;
+        }
+
+        //ISBNバリデーションチェック
+        if (!isIsbn) {
+            model.addAttribute("error1", "半角数字10文字または13文字で入力して下さい");
+            check = true;
+        }
+
+        //タイトルバリデーションチェック
+        if (title.length() > 255) {
+            model.addAttribute("error3", "255文字以内で入力してください");
+            check = true;
+        }
+        //著者バリデーションチェック
+        if (author.length() > 255) {
+            model.addAttribute("error3", "255文字以内で入力してください");
+            check = true;
+        }
+        //出版社バリデーションチェック
+        if (publisher.length() > 255) {
+            model.addAttribute("error3", "255文字以内で入力してください");
+            check = true;
+        }
+        //説明文バリデーションチェック
+        if (descripton.length() > 255) {
+            model.addAttribute("error3", "255文字以内で入力してください");
+            check = true;
+        }
+
+        //yyyymmddのバリデーションチェック
+        if (publishDate.length() != 8) {
             model.addAttribute("error2", "年月日を入力してください");
             check = true;
         }

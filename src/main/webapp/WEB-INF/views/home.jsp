@@ -60,20 +60,16 @@
                             <ul>
                                 <li class="book_title">${bookInfo.title}</li>
                                 <li class="book_author">${bookInfo.author}</li>
-                                <li class="book_publish_Date">${bookInfo.publishDate}</li>
-                                <li class="book_publisher">${bookInfo.publisher}</li>
+                                <li class="book_publisher">出版社:${bookInfo.publisher}</li>
+                                <li class="book_publish_Date">出版日:${bookInfo.publishDate}</li>
                             </ul>
                         </div>
                     </div>
                 </c:forEach>
             </div>
         </div>
-        </div>
         <div id="page_top">
             <a href="#"></a>
-        </div>
-        </div>
-        </div>
         </div>
     </main>
 </body>

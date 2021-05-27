@@ -53,6 +53,8 @@ public class BooksService {
 
         return bookDetailsInfo;
     }
+    
+    
 
     /**
      * 書籍を登録する
@@ -107,6 +109,23 @@ public class BooksService {
                 + "'where id=" + bookInfo.getBookId() + ";";
         jdbcTemplate.update(sql);
     }
+    
+    /**
+     * サムネイルがない場合の書籍更新
+     * @param bookInfo
+     */
+    public void nullThumbnail(BookDetailsInfo bookInfo) {
+        String sql = "update books set title='" + bookInfo.getTitle()
+                + "',author='" + bookInfo.getAuthor()
+                + "',publisher='" + bookInfo.getPublisher()
+                + "',publish_date='" + bookInfo.getPublishDate()
+                + "',upd_date=sysdate()"
+                + ",isbn='" + bookInfo.getIsbn()
+                + "',descripton='" + bookInfo.getDescripton()
+                + "'where id=" + bookInfo.getBookId() + ";";
+        jdbcTemplate.update(sql);
+    }
+
 
     /**
      * 検索された文字を含むタイトルの取得
