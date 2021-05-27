@@ -247,6 +247,7 @@ main>.operation>.keyword {
 /* メインコンテンツ */
 main {
 	margin: 20px;
+	word-wrap: break-word;
 
 	/* min-height: 1024px; */
 }
@@ -255,6 +256,7 @@ main {
 main .content_body {
 	display: flex;
 	flex-wrap: wrap;
+	
 }
 
 #page_top a::before {

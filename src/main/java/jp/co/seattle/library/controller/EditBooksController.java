@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jp.co.seattle.library.dto.BookDetailsInfo;
 import jp.co.seattle.library.service.BooksService;
+import jp.co.seattle.library.service.LendingService;
 import jp.co.seattle.library.service.ThumbnailService;
 
 /**
@@ -37,12 +38,13 @@ public class EditBooksController {
     @Autowired
     private ThumbnailService thumbnailService;
 
+    @Autowired
+    private LendingService lendingService;
+
     @RequestMapping(value = "/btn_editBook", method = RequestMethod.POST)
     public String login(Locale locale, @RequestParam("bookId") Integer bookId, Model model) {
-
         BookDetailsInfo newIdInfo = booksService.getBookInfo(bookId);
         model.addAttribute("bookDetailsInfo", newIdInfo);
-
         return "edit";
     }
 
@@ -85,18 +87,13 @@ public class EditBooksController {
         bookInfo.setDescripton(descripton);
         bookInfo.setBookId(bookId);
 
+        BookDetailsInfo newIdInfo = booksService.getBookInfo(bookId);
+
         boolean isIsbn = isbn.matches("(^\\d{10}|\\d{13}$)?");
-        boolean isTitle = title.matches("(^\\\\d{1,255}$)?");
-        boolean isAuthor = author.matches("(^\\\\d{1,255}$)?");
-        boolean isPublisher = publisher.matches("(^\\\\d{1,255}$)?");
-        boolean isPublishDate = publishDate.matches("(^\\\\d{1,255}$)?");
+
         boolean check = false;
 
-        if (!isIsbn) {
-            model.addAttribute("error1", "半角数字10文字または13文字で入力して下さい");
-            check = true;
-        }
-
+        //出版日バリデーションチェック
         try {
             DateFormat df = new SimpleDateFormat("yyyyMMdd");
             df.setLenient(false);
@@ -106,12 +103,45 @@ public class EditBooksController {
             check = true;
         }
 
+        //ISBNバリデーションチェック
+        if (!isIsbn) {
+            model.addAttribute("error1", "半角数字10文字または13文字で入力して下さい");
+            check = true;
+        }
+
+        //タイトルバリデーションチェック
+        if (title.length() > 255) {
+            model.addAttribute("error3", "255文字以内で入力してください");
+            check = true;
+        }
+        //著者バリデーションチェック
+        if (author.length() > 255) {
+            model.addAttribute("error3", "255文字以内で入力してください");
+            check = true;
+        }
+        //出版社バリデーションチェック
+        if (publisher.length() > 255) {
+            model.addAttribute("error3", "255文字以内で入力してください");
+            check = true;
+        }
+        //説明文バリデーションチェック
+        if (descripton.length() > 255) {
+            model.addAttribute("error3", "255文字以内で入力してください");
+            check = true;
+        }
+
+        if (publishDate.length() != 8) {
+            model.addAttribute("error2", "年月日を入力してください");
+            check = true;
+        }
+
         if (check) {
+            model.addAttribute("bookDetailsInfo", newIdInfo);
             return "edit";
         }
+
         // クライアントのファイルシステムにある元のファイル名を設定する
         String thumbnail = file.getOriginalFilename();
-
         if (!file.isEmpty()) {
             try {
                 // サムネイル画像をアップロード
@@ -121,19 +151,33 @@ public class EditBooksController {
 
                 bookInfo.setThumbnailName(fileName);
                 bookInfo.setThumbnailUrl(thumbnailUrl);
-
             } catch (Exception e) {
-
                 // 異常終了時の処理
                 logger.error("サムネイルアップロードでエラー発生", e);
                 model.addAttribute("bookDetailsInfo", bookInfo);
                 return "editBook";
             }
         }
-        booksService.updateBooks(bookInfo);
-        BookDetailsInfo newIdInfo = booksService.getBookInfo(bookId);
+
+        //サムネイル画像がある場合の更新
+        if (!file.isEmpty()) {
+            booksService.updateBooks(bookInfo);
+        }
+        //サムネイル画像がない場合の更新
+        if (!file.isEmpty()) {
+            booksService.nullThumbnail(bookInfo);
+        }
+
+        //貸出機能
+        if (lendingService.lentCheck(bookId) == 1) {
+            model.addAttribute("lending", "貸出中");
+        }
+
+        if (lendingService.lentCheck(bookId) == 0) {
+            model.addAttribute("lending", "貸出可");
+        }
+
         model.addAttribute("bookDetailsInfo", newIdInfo);
         return "details";
-
     }
 }

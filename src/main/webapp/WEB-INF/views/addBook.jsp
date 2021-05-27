@@ -5,47 +5,47 @@
 <%@ taglib prefix="f" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-  
+  
 <meta charset="UTF-8">
-  
-<title>書籍の追加｜シアトルライブラリ｜シアトルコンサルティング株式会社</title>   
+  
+<title>書籍の追加｜シアトルライブラリ｜シアトルコンサルティング株式会社</title>   
 <link href="<c:url value="/resources/css/reset.css" />" rel="stylesheet" type="text/css">
-  
+  
 <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet">
-  
+  
 <link href="<c:url value="/resources/css/default.css" />" rel="stylesheet" type="text/css">
-  
+  
 <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-  
+  
 <link href="<c:url value="/resources/css/home.css" />" rel="stylesheet" type="text/css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  
+  
 <script src="resources/js/thumbnail.js"></script>
-    
+    
 <script src="resources/js/addBtn.js"></script>
 </head>
 <body class="wrapper">
-      
+      
     <header>
-            
+            
         <div class="left">
-                  <img class="mark" src="resources/img/logo.png" />       
+                  <img class="mark" src="resources/img/logo.png" />       
             <div class="logo">Seattle Library</div>
-                
+                
         </div>
-            
+            
         <div class="right">
-                  
+                  
             <ul>
-                        
-                <li><a href="<%=request.getContextPath()%>/home" class="menu">Home</a></li>         
-                <li><a href="<%=request.getContextPath()%>/">ログアウト</a></li>       
+                        
+                <li><a href="<%=request.getContextPath()%>/home" class="menu">Home</a></li>         
+                <li><a href="<%=request.getContextPath()%>/">ログアウト</a></li>       
             </ul>
-                
+                
         </div>
-          
+          
     </header>
-      
+      
     <main>
         <form action="<%=request.getContextPath()%>/insertBook" method="post" enctype="multipart/form-data" id="data_upload_form">
             <h1>書籍の追加</h1>
@@ -64,6 +64,9 @@
                         </c:if>
                         <c:if test="${!empty error2 }">
                             <div class="error">${error2}</div>
+                        </c:if>
+                         <c:if test="${!empty error3 }">
+                            <div class="error">${error3}</div>
                         </c:if>
                         <span>書籍名</span><span class="care care2">必須</span>
                         <c:if test="${!empty bookInfo}">
@@ -94,7 +97,7 @@
                     <div>
                         <span>出版日</span><span class="care care2">必須</span>
                         <c:if test="${!empty bookInfo}">
-                            <input type="text" name="bookId" value="${bookInfo.publishDate}">
+                            <input type="text" name="publishDate" value="${bookInfo.publishDate}">
                         </c:if>
                         <c:if test="${empty bookInfo }">
                             <input type="text" name="publishDate" required>
@@ -112,7 +115,7 @@
                     <div>
                         <span>説明文</span><span class="care care1">任意</span>
                         <c:if test="${!empty bookinfo }">
-                            <input type="text" id="bookid" name="value"= "${bookInfo.descripton}">
+                            <input type="text" id="bookid" name="descripton" value="${bookInfo.descripton}">
                         </c:if>
                         <c:if test="${empty bookinfo}">
                             <input type="text" name="descripton">
